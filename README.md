@@ -31,8 +31,13 @@ Open a new terminal afterwards.
 
 ## Usage
 
+Name accounts whatever you like: `work`, `hobby`, `client-acme` and so on. Names can use letters, digits, `-` and `_`.
+
 ```sh
-claude-use add work      # create a "work" account (~/.claude-work), once
+claude-use add work      # create an account (~/.claude-work), once per account
+claude-use add hobby
+claude-use list          # show all accounts
+
 cd ~/code/work-project
 claude-use work          # this folder now uses the work account
 claude                   # first time: run /login and sign in with the work account
@@ -41,7 +46,7 @@ claude-use               # show which account this folder uses
 claude-use default       # go back to the main account (~/.claude)
 ```
 
-Folders without a `.claude-account` file use your normal `~/.claude` login.
+Folders without a `.claude-account` file use your normal `~/.claude` login. If a folder names an account that doesn't exist on this machine, `claude` stops with an error instead of starting logged out.
 
 ## Notes
 
