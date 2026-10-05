@@ -10,6 +10,6 @@ line="export PATH=\"$bin:\$PATH\""
 if grep -qsF "$line" "$rc"; then
   echo "Already on PATH in $rc"
 else
-  printf '\n# claude-code-accounts\n%s\n' "$line" >> "$rc"
+  printf '\n# claude-code-multi-account\n%s\n' "$line" >> "$rc"
   echo "Added $bin to PATH in $rc. Restart your terminal app (not just the tab)."
 fi

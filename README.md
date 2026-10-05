@@ -1,6 +1,6 @@
-# claude-code-accounts
+# claude-code-multi-account
 
-Use more than one Claude account with [Claude Code](https://claude.com/claude-code) and choose the account per project. It works in PowerShell, cmd, Git Bash, macOS and Linux.
+Use multiple Claude Code accounts (work, personal, client) on one machine and switch automatically per project. Works on Windows (PowerShell, cmd, Git Bash), macOS and Linux.
 
 Claude Code stores its login in a config folder (`~/.claude`), and the `CLAUDE_CONFIG_DIR` environment variable points it at a different one. This repo adds two small commands around that:
 
@@ -25,7 +25,7 @@ powershell -ExecutionPolicy Bypass -File install.ps1
 sh install.sh
 ```
 
-Using fish? Run `fish_add_path -m /path/to/claude-code-accounts/bin` instead.
+Using fish? Run `fish_add_path -m /path/to/claude-code-multi-account/bin` instead.
 
 Afterwards, restart your terminal app (VS Code, Windows Terminal, etc.), not just the tab. Open terminals keep the old PATH.
 

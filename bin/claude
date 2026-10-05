@@ -5,7 +5,7 @@ if [ -f .claude-account ]; then
   acct=$(tr -d '\r\n' < .claude-account)
   export CLAUDE_CONFIG_DIR="${USERPROFILE:-$HOME}/.claude-$acct"
   if [ ! -d "$CLAUDE_CONFIG_DIR" ]; then
-    echo "claude-code-accounts: no account '$acct' on this machine. Create it with: claude-use add $acct" >&2
+    echo "claude-code-multi-account: no account '$acct' on this machine. Create it with: claude-use add $acct" >&2
     exit 1
   fi
 else
@@ -20,5 +20,5 @@ for d in $PATH; do
 done
 # Old "local" installs live here, behind a shell alias instead of on PATH.
 [ -x "$HOME/.claude/local/claude" ] && exec "$HOME/.claude/local/claude" "$@"
-echo "claude-code-accounts: could not find the real claude on PATH." >&2
+echo "claude-code-multi-account: could not find the real claude on PATH." >&2
 exit 1
