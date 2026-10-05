@@ -13,5 +13,7 @@ for d in $PATH; do
     [ -f "$f" ] && [ -x "$f" ] && exec "$f" "$@"
   done
 done
+# Old "local" installs live here, behind a shell alias instead of on PATH.
+[ -x "$HOME/.claude/local/claude" ] && exec "$HOME/.claude/local/claude" "$@"
 echo "claude-code-accounts: could not find the real claude on PATH." >&2
 exit 1

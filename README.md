@@ -19,11 +19,13 @@ Clone the repo somewhere permanent, then put its `bin` folder on your PATH, **be
 powershell -ExecutionPolicy Bypass -File install.ps1
 ```
 
-**macOS / Linux**: add this line to `~/.bashrc` or `~/.zshrc`:
+**macOS / Linux** (adds `bin` to `~/.zshrc`, `~/.bashrc`, `~/.bash_profile` on macOS bash, or `~/.profile`):
 
 ```sh
-export PATH="/path/to/claude-code-accounts/bin:$PATH"
+sh install.sh
 ```
+
+Using fish? Run `fish_add_path -m /path/to/claude-code-accounts/bin` instead.
 
 Open a new terminal afterwards.
 
@@ -49,7 +51,9 @@ Folders without a `.claude-account` file use your normal `~/.claude` login.
 - **Settings are copied, not shared.** `settings.json` and `CLAUDE.md` are copied when the account is created, because Claude Code rewrites them and that would break a link. Copy them again if you want the accounts to match.
 - **More shared folders.** If your setup keeps other folders in `~/.claude` (for example, tools your hooks call), add their names to the list in `bin/claude-use.cmd` (Windows) or `bin/claude-use` (macOS/Linux) before running `claude-use add`.
 - **Plugins.** If a plugin doesn't load in a new account, run `/plugin` there and reinstall it.
-- **macOS / Linux are untested.** These scripts were tested on Windows (PowerShell, cmd and Git Bash). The macOS/Linux scripts are plain `sh`, but nobody has run them there yet.
+- **`alias claude=...` wins over PATH.** Older Claude Code "local" installs add an alias like `alias claude="~/.claude/local/claude"` to your shell config. Remove it, or the wrapper is skipped. The wrapper still finds `~/.claude/local/claude` without the alias.
+- **macOS login.** On macOS, Claude Code stores the login in the Keychain under a name derived from the config folder, so each account keeps its own login there too.
+- **Tested on** Windows (PowerShell, cmd, Git Bash) and Linux (Ubuntu). macOS uses the same `sh` scripts as Linux but hasn't been run on a Mac yet.
 
 ## Uninstall
 

@@ -3,3 +3,4 @@
 *.ps1 eol=crlf
 bin/claude eol=lf
 bin/claude-use eol=lf
+install.sh eol=lf
