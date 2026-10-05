@@ -27,7 +27,7 @@ sh install.sh
 
 Using fish? Run `fish_add_path -m /path/to/claude-code-accounts/bin` instead.
 
-Open a new terminal afterwards.
+Afterwards, restart your terminal app (VS Code, Windows Terminal, etc.), not just the tab. Open terminals keep the old PATH.
 
 ## Usage
 
