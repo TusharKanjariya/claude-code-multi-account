@@ -5,10 +5,10 @@
 #        claude-use add <name>    create ~/.claude-<name>, sharing skills, plugins etc. with ~/.claude
 #        claude-use list          list accounts
 
-# Git Bash / MSYS: ln -s makes copies there, so use the Windows version.
-case "$(uname -s)" in
-  MINGW*|MSYS*|CYGWIN*) exec cmd //c "$(cygpath -w "$(dirname "$0")/claude-use.cmd")" "$@" ;;
-esac
+# Windows bash (Git Bash, MSYS2, Cygwin): ln -s makes copies there, so use the Windows version.
+if command -v cygpath >/dev/null 2>&1; then
+  exec cmd //c "$(cygpath -w "$(dirname "$0")/claude-use.cmd")" "$@"
+fi
 
 src="$HOME/.claude"
 check_name() {
