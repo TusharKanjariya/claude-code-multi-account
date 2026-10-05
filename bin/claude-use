@@ -1,0 +1,36 @@
+#!/bin/sh
+# Usage: claude-use               show this folder's account
+#        claude-use <name>        use ~/.claude-<name> in this folder
+#        claude-use default       go back to ~/.claude
+#        claude-use add <name>    create ~/.claude-<name>, sharing skills, plugins etc. with ~/.claude
+
+# Git Bash / MSYS: ln -s makes copies there, so use the Windows version.
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*) exec cmd //c "$(cygpath -w "$(dirname "$0")/claude-use.cmd")" "$@" ;;
+esac
+
+src="$HOME/.claude"
+case "$1" in
+  "") cat .claude-account 2>/dev/null || echo default ;;
+  default)
+    rm -f .claude-account
+    echo "This folder now uses the default account." ;;
+  add)
+    [ -n "$2" ] || { echo "Usage: claude-use add <name>"; exit 1; }
+    dst="$HOME/.claude-$2"
+    mkdir -p "$dst"
+    # Shared with the main account. Add folders here if your setup keeps more in ~/.claude.
+    for d in skills agents commands hooks plugins output-styles; do
+      [ -e "$src/$d" ] && [ ! -e "$dst/$d" ] && ln -s "$src/$d" "$dst/$d"
+    done
+    # Copied, because Claude Code rewrites these and would break a link.
+    for f in settings.json CLAUDE.md; do
+      [ -e "$src/$f" ] && [ ! -e "$dst/$f" ] && cp "$src/$f" "$dst/$f"
+    done
+    echo "Created $dst"
+    echo "Next: claude-use $2, then run claude and /login." ;;
+  *)
+    [ -d "$HOME/.claude-$1" ] || { echo "No account '$1'. Create it with: claude-use add $1"; exit 1; }
+    echo "$1" > .claude-account
+    echo "This folder now uses account: $1" ;;
+esac

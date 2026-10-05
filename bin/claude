@@ -1,0 +1,17 @@
+#!/bin/sh
+# Starts the real claude with the account chosen for this folder (.claude-account).
+here=$(cd "$(dirname "$0")" && pwd)
+if [ -f .claude-account ]; then
+  export CLAUDE_CONFIG_DIR="${USERPROFILE:-$HOME}/.claude-$(tr -d ' \r\n' < .claude-account)"
+else
+  unset CLAUDE_CONFIG_DIR
+fi
+IFS=:
+for d in $PATH; do
+  [ "$d" = "$here" ] && continue
+  for f in "$d/claude" "$d/claude.exe"; do
+    [ -f "$f" ] && [ -x "$f" ] && exec "$f" "$@"
+  done
+done
+echo "claude-code-accounts: could not find the real claude on PATH." >&2
+exit 1

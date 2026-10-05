@@ -1,0 +1,5 @@
+* text=auto
+*.cmd eol=crlf
+*.ps1 eol=crlf
+bin/claude eol=lf
+bin/claude-use eol=lf
