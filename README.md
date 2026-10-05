@@ -63,3 +63,7 @@ Folders without a `.claude-account` file use your normal `~/.claude` login. If a
 ## Uninstall
 
 Remove the `bin` folder from your PATH. Account folders (`~/.claude-<name>`) and `.claude-account` files can be deleted by hand.
+
+## License
+
+[MIT](LICENSE)
